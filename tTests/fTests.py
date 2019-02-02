@@ -6,23 +6,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-@pytest.fixture(scope="session")
-def driver_get(request):
-    from selenium import webdriver
-    web_driver = webdriver.Chrome()
-    web_driver.implicitly_wait(10)
-    session = request.node
-    for item in session.items:
-        cls = item.getparent(pytest.Class)
-        setattr(cls.obj,"driver",web_driver)
-    yield
-    web_driver.close()
 
 class TestSetup:
     def test_data_are_valid(self):
         assert 1 == 1
 
-@pytest.mark.usefixtures("driver_get")
+@pytest.mark.usefixtures("driver")
 class TestLogin:
     def cls_config(self):
         wait = WebDriverWait(self.driver, 10)
@@ -50,4 +39,4 @@ class TestLogin:
         self.driver.find_element_by_link_text("Logout").click()
         assert self.driver.title == "OrangeHRM"
 
-print("Test Completed")#
+print("Test Completed")
