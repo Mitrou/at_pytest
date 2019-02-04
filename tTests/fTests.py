@@ -4,12 +4,22 @@ import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from conftest import base_url
 
 
 class TestSetup:
     def test_data_are_valid(self):
         assert 1 == 1
+
+@pytest.mark.usefixtures("driver")
+class TestWebSmoke:
+    def test_page_load(self):
+        try:
+            self.driver.get(base_url)
+            self.driver.implicitly_wait(10)
+        except SmkError:
+            pytest.fail("Base URL smoke failure")
+
 
 @pytest.mark.usefixtures("driver")
 class TestLogin:
@@ -18,7 +28,7 @@ class TestLogin:
         return wait
 
     def test_init_page(self):
-        self.driver.get("https://opensource-demo.orangehrmlive.com/")
+        self.driver.get(base_url)
         self.driver.implicitly_wait(10)
         assert self.driver.title == "OrangeHRM"
 
