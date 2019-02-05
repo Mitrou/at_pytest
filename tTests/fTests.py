@@ -11,7 +11,7 @@ class TestSetup:
     def test_data_are_valid(self):
         assert 1 == 1
 
-@pytest.mark.usefixtures("driver")
+
 class TestWebSmoke:
     def test_page_load(self):
         try:
@@ -21,7 +21,7 @@ class TestWebSmoke:
             pytest.fail("Base URL smoke failure")
 
 
-@pytest.mark.usefixtures("driver")
+
 class TestLogin:
     def cls_config(self):
         wait = WebDriverWait(self.driver, 10)
