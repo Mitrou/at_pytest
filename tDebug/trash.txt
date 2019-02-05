@@ -1,0 +1,69 @@
+@pytest.fixture(scope="session", autouse=True)
+def driver(request):
+    from selenium import webdriver
+    web_driver = webdriver.Chrome()
+    session = request.node
+    for item in session.items:
+        cls = item.getparent(pytest.Class)
+        setattr(cls.obj, "driver", web_driver)
+
+    yield
+
+    web_driver.close()
+
+@pytest.mark.usefixtures("resource_setup")
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    setattr(item, "rep_" + rep.when, rep)
+    return rep
+
+'''
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    report = yield
+    result = report.get_result()
+    file_name = result.nodeid.replace("::", "_") + ".png"
+    allure.attach(driver.get_screenshot_as_png(),
+                  name=file_name,
+                  attachment_type=allure.attachment_type.PNG)
+'''
+
+@pytest.mark.hookwrapper(hookwrapper=True, tryfirst=True)
+def pytest_runtest_makereport(item):
+    outcome = yield
+    rep = outcome.get_result()
+    setattr(item, "rep_" + rep.when, rep)
+    if rep.when == 'call':
+        if rep.failed:
+            file_name = __name__ + ".png"
+            allure.attach(driver.get_screenshot_as_png(),
+                          name=file_name,
+                          attachment_type=allure.attachment_type.PNG)
+
+'''
+@pytest.mark.hookwrapper
+def pytest_runtest_makereport(item, call):
+    pytest_html = item.config.pluginmanager.getplugin('html')
+    outcome = yield
+    report = outcome.get_result()
+    extra = getattr(report, 'extra', [])
+    if report.when == 'call':
+        # always add url to report
+        # extra.append(pytest_html.extras.url(_current_url()))
+        # report.extra = extra
+        file_name = report.nodeid.replace("::", "_") + ".png"
+#        driver.get_screenshot_as_file(str(file_name))
+        print(item(self.current_url))
+
+def _capture_screenshot(name):
+    driver.get_screenshot_as_file(str(name))
+
+def _current_url():
+    driver.current_url()
+
+'''node is <Function test_init_page> /br the call is<CallInfo when='call' exception: assert 'OrangeHRM' == 'OrangeHRM222'
+  - OrangeHRM
+  + OrangeHRM222
+  ?          +++> /br the report is <TestReport 'tTests/init_test.py::TestLogin::test_init_page' when='call' outcome='failed'>

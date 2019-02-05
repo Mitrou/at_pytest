@@ -15,7 +15,7 @@ driver.find_element_by_name("txtPassword").send_keys("admin123")
 driver.find_element_by_id("btnLogin").click()
 driver.implicitly_wait(10)
 print(driver.current_url)
-driver.get_screenshot_as_file('sssss.png')
+driver.get_screenshot_as_file()
 def conf(self, arg):
     self.wait = WebDriverWait(self.driver, arg)
     return self.wait

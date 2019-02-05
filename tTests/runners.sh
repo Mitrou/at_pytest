@@ -1,6 +1,7 @@
+#!/usr/bin/env bash
 pytest -s -v fTests.py --html=report.html --self-contained-html
 
-
+"""
 @pytest.mark.hookwrapper(autouse=True)
 def pytesthtml(item):
     """
@@ -24,3 +25,4 @@ def pytesthtml(item):
                        'onclick="window.open(this.src)" align="right"/></div>'.format(file_name)
                 extra.append(pytest_html.extras.html(html))
         report.extra = extra
+"""

@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from conftest import base_url
-
+import allure
 
 class TestSetup:
     def test_data_are_valid(self):
@@ -32,9 +32,10 @@ class TestLogin:
         self.driver.implicitly_wait(10)
         assert self.driver.title == "OrangeHRM"
 
+
     def test_login(self):
         err = 0
-        self.driver.find_element_by_name("txtUsername").send_keys("Admin")
+        self.driver.find_element_by_name("txtUsername").send_keys("Admin2")
         self.driver.find_element_by_name("txtPassword").send_keys("admin123")
         self.driver.find_element_by_id("btnLogin").click()
         self.driver.implicitly_wait(10)
