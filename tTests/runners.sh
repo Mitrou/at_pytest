@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-pytest -s -v fTests.py --html=report.html --self-contained-html
+pytest --alluredir=/tmp/my_allure_results
 
 """
 @pytest.mark.hookwrapper(autouse=True)

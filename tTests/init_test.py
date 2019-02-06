@@ -29,7 +29,7 @@ class TestLogin:
     def test_init_page(self):
         self.driver.get(base_url)
         self.driver.implicitly_wait(10)
-        assert self.driver.title == "OrangeHRM11"
+        assert self.driver.title == "OrangeHRM"
 
     def test_login(self):
         err = 0
