@@ -5,7 +5,8 @@ import pytest
 from selenium import webdriver
 
 
-base_url = "https://opensource-demo.orangehrmlive.com/"
+base_url_mock = "https://opensource-demo.orangehrmlive.com/"
+base_url = "http://localhost:5005"
 
 
 @pytest.fixture(autouse=True, scope='session')
