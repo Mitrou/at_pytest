@@ -12,6 +12,7 @@ How to set up:
 3. Activate virtualenv from CLI: `.\<env name>\Scripts\activate`
 2. Execute in CLI from respective folder: `pip install -r requirements.txt` to install project libs
 6. For Windows: execute following in MSPowerShell to install scoop (package manager for windows) and following:
+
 6.1 `Set-ExecutionPolicy RemoteSigned -scope CurrentUser` to set rights
 6.2 `iex (new-object net.webclient).downloadstring('https://get.scoop.sh')'`
 6.3 -Install allure framework(MSPowerShell): `scoop install allure`
