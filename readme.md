@@ -21,3 +21,6 @@ How to run:
     1.1 This will collect and execute tests. Also allure dfata would be stored.
 2. Run allure report by @allure serve <report folder>@ (eg. @allure serve /tmp/my_allure_results@)
     2.1 This will run web server with report page generated. Run history for each TC is supported. But real time update is not, sp you need to rerun allure serve after each test execution.
+
+
+-->still under construction!<--
