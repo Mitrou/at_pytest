@@ -15,7 +15,7 @@ class TestSetup:
 class TestWebSmoke:
     def test_page_load(self):
         try:
-            self.driver.get(base_url)
+            self.driver.get(base_url_mock)
             self.driver.implicitly_wait(10)
         except SmkError:
             pytest.fail("Base URL smoke failure")
@@ -27,7 +27,7 @@ class TestLogin:
         return wait
 
     def test_init_page(self):
-        self.driver.get(base_url)
+        self.driver.get(base_url_mock)
         self.driver.implicitly_wait(10)
         assert self.driver.title == "OrangeHRM"
 

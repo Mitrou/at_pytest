@@ -3,6 +3,8 @@ import time
 import allure
 import pytest
 from selenium import webdriver
+import random
+import string
 
 
 base_url_mock = "https://opensource-demo.orangehrmlive.com/"
@@ -29,4 +31,8 @@ def pytest_exception_interact(node, call, report):
         attachment_type=allure.attachment_type.PNG
     )
 
+
+def random_chars_and_numbers_string(length=8):
+    random_keys = ''.join(random.choices(string.ascii_uppercase + string.digits, k=length))
+    return random_keys
 
