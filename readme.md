@@ -1,3 +1,4 @@
+-->still under construction!<--
 ## Repository for web test automation WM.
 
 Browsers executables must be put into virtualenv/Scripts folder along with
@@ -22,5 +23,10 @@ How to run:
 2. Run allure report by 'allure serve <report folder>'' (eg. 'allure serve /tmp/my_allure_results')
     2.1 This will run web server with report page generated. Run history for each TC is supported. But real time update is not, sp you need to rerun allure serve after each test execution.
 
+DoD:
+- [x] Initial Structure
+- [x] Reporting Engine
+- [x] Some Smoke tests with FAILED reporting by trace and screenshot on failure
+- [ ] Actual story test coverage
 
--->still under construction!<--
+
