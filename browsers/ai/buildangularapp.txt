@@ -1,0 +1,3 @@
+npm install
+поставилось, теперь npm run server  в другом сам фронт npm start
+npm start -- --port 8000
