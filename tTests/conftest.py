@@ -32,6 +32,7 @@ def pytest_exception_interact(node, call, report):
     )
 
 
+@pytest.fixture(autouse=True)
 def random_chars_and_numbers_string(length=8, mode=0):
     random_keys = ''
     if mode == 0:
