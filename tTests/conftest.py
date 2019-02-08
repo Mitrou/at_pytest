@@ -32,7 +32,13 @@ def pytest_exception_interact(node, call, report):
     )
 
 
-def random_chars_and_numbers_string(length=8):
-    random_keys = ''.join(random.choices(string.ascii_uppercase + string.digits, k=length))
+def random_chars_and_numbers_string(length=8, mode=0):
+    random_keys = ''
+    if mode == 0:
+        random_keys = ''.join(random.choices(string.ascii_uppercase + string.digits, k=length))
+    elif mode == 1:
+        random_keys = ''.join(random.choices(string.ascii_uppercase, k=length))
+    elif mode == 2:
+        random_keys = ''.join(random.choices(string.digits, k=length))
     return random_keys
 

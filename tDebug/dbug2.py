@@ -10,23 +10,27 @@ import string
 driver = webdriver.Chrome()
 driver.get('http://localhost:5005/#/login')
 driver.find_element_by_id("email").send_keys('sdWWWWsdfsdf')
-sleep(1)
-try:
-    driver.find_element_by_class_name('form-error').is_displayed()
-    print('PRESENT!')
-    print(driver.find_element_by_class_name('form-error')).get_text()
-except:
-    print('not present')
 driver.find_element_by_id("email").send_keys(Keys.CONTROL, "a", Keys.DELETE)
-driver.find_element_by_id("email").click()
-sleep(1)
-try:
-    driver.find_element_by_class_name('form-error').is_displayed()
-    print('PRESENT!')
-    print(driver.find_element_by_class_name('form-error')).get_text()
-except:
-    print('not present')
 
+# try:
+#     driver.find_element_by_class_name('form-error').is_displayed()
+#     print('PRESENT!')
+#     print(driver.find_element_by_class_name('form-error')).get_text()
+# except:
+#     print('not present')
+# driver.find_element_by_id("email").send_keys(Keys.CONTROL, "a", Keys.DELETE)
+# driver.find_element_by_id("email").click()
+# sleep(1)
+# try:
+#     driver.find_element_by_class_name('form-error').is_displayed()
+#     print('PRESENT!')
+#     print(driver.find_element_by_xpath("//div[@class='form-error']/p").get_text())
+# except:
+#     print('not present')
+a = driver.find_elements_by_xpath("//div[@class='form-error']/p")
+print(a)
+print(a[1].get_attribute('innerText'))
+print(len(a))
 driver.close()
 
 # driver = webdriver.Chrome()
