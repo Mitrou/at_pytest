@@ -19,6 +19,10 @@ def driver(request):
     yield driver
     driver.close()
 
+@pytest.fixture(autouse=True, scope='function')
+def errors():
+    errors = []
+    return errors
 
 def pytest_exception_interact(node, call, report):
     allure.attach(

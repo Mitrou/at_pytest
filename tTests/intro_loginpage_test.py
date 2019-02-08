@@ -2,12 +2,18 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 import pytest
+# from conftest import base_url
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from toolbelt import base_url, random_chars_and_numbers_string
+from toolbelt import base_url
+from toolbelt import random_chars_and_numbers_string
 import allure
-from
+
+
+class TestSetup:
+    def test_data_are_valid(self):
+        assert 1 == 1
 
 
 class TestWebLoginPageLoad:
@@ -73,29 +79,48 @@ class TestLoginPageErrors:
             pytest.fail("No error form on empty EMAIL field")
 
     def test_email_emptyerrortext(self):
+        errors = []
         error_messages = self.driver.find_elements_by_xpath("//div[@class='form-error']/p")
-        assert (len(error_messages) == 2) and (error_messages[0] == 'Email is required!') and (error_messages[1] == 'Please input a valid email!')
+        if not len(error_messages) == 2:
+            errors.append("Error messages count different from expected")
+        if not error_messages[0].get_attribute('innerText') == 'Email is required!':
+            errors.append("Error message for empty email FAILURE")
+        if not error_messages[1].get_attribute('innerText') == 'Please input a valid email!':
+            errors.append("Error message for email format FAILURE")
+        assert not errors, "errors occured:{}".format(" ".join(errors))
 
     def test_email_empty_flow1(self):
+        errors = []
         self.driver.find_element_by_id("email").send_keys(random_chars_and_numbers_string())
         error_messages = self.driver.find_elements_by_xpath("//div[@class='form-error']/p")
-        assert (len(error_messages) == 1) and (error_messages[0] == 'Please input a valid email!')
+        if not len(error_messages) == 1:
+            errors.append("Error messages count different from expected")
+        if not error_messages[0].get_attribute('innerText') == 'Please input a valid email!':
+            errors.append("Error message for wrong email format FAILURE")
+        assert not errors, "errors occured:{}".format(" ".join(errors))
 
     def test_email_empty_flow2(self):
+        self.driver.find_element_by_id("email").send_keys(random_chars_and_numbers_string())
         self.driver.find_element_by_id("email").send_keys('@')
         self.driver.find_element_by_id("email").send_keys(random_chars_and_numbers_string())
         self.driver.find_element_by_id("email").send_keys('.')
-        self.driver.find_element_by_id("email").send_keys(random_chars_and_numbers_string(2, 2))
-        assert self.driver.find_elements_by_xpath("//div[@class='form-error']/p") == 0
+        self.driver.find_element_by_id("email").send_keys(random_chars_and_numbers_string(2, 1))
+        error_messages = self.driver.find_elements_by_xpath("//div[@class='form-error']/p")
+        assert len(error_messages) == 0
 
     def test_email_empty_flow3(self):
+        errors = []
         error_messages = self.driver.find_elements_by_xpath("//div[@class='form-error']/p")
         self.driver.find_element_by_id("email").send_keys(Keys.BACKSPACE*2)
-        assert (len(error_messages) == 1) and (error_messages[0] == 'Please input a valid email!')
+        if not len(error_messages) == 1:
+            errors.append("Error messages count different from expected")
+        if not error_messages[0].get_attribute('innerText') == 'Please input a valid email!':
+            errors.append("Error message for wrong email format FAILURE")
+        assert not errors, "errors occured:{}".format(" ".join(errors))
 
     def test_email_empty_flow4(self):
         self.driver.find_element_by_id("email").send_keys(random_chars_and_numbers_string(3, 2))
-        assert self.driver.find_elements_by_xpath("//div[@class='form-error']/p") == 0
+        assert len(self.driver.find_elements_by_xpath("//div[@class='form-error']/p")) == 0
 
     def test_password_emptyform(self):
         self.driver.find_element_by_id("password").send_keys(random_chars_and_numbers_string())
@@ -107,13 +132,15 @@ class TestLoginPageErrors:
             pytest.fail("No error message on empty EMAIL field")
 
     def test_password_empty_message(self):
-        self.driver.find_element_by_id("password")..send_keys(Keys.CONTROL, "a", Keys.DELETE)
-        assert self.driver.find_elements_by_xpath("//div[@class='form-error']/p") == 1
+        self.driver.find_element_by_id("email").send_keys(Keys.CONTROL, "a", Keys.DELETE)
+        self.driver.find_element_by_id("email").send_keys('fully@walid.eml')
+        self.driver.find_element_by_id("password").send_keys(Keys.CONTROL, "a", Keys.DELETE)
+        assert len(self.driver.find_elements_by_xpath("//div[@class='form-error']/p")) == 1
 
     def test_password_empty_message1(self):
-        assert self.driver.find_elements_by_xpath("//div[@class='form-error']/p")[0] == 'Password is required!'
+        assert self.driver.find_elements_by_xpath("//div[@class='form-error']/p")[0].get_attribute('innerText') == 'Password is required!'
 
     def test_password_empty_flow1(self):
         self.driver.find_element_by_id("password").send_keys(random_chars_and_numbers_string())
-        assert self.driver.find_elements_by_xpath("//div[@class='form-error']/p") == 0
+        assert len(self.driver.find_elements_by_xpath("//div[@class='form-error']/p")) == 0
 

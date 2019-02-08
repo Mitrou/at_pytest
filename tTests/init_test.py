@@ -4,8 +4,10 @@ import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from conftest import base_url
+# from conftest import base_url
+from toolbelt import base_url_mock
 import allure
+
 
 class TestSetup:
     def test_data_are_valid(self):
@@ -17,7 +19,7 @@ class TestWebSmoke:
         try:
             self.driver.get(base_url_mock)
             self.driver.implicitly_wait(10)
-        except SmkError:
+        except:
             pytest.fail("Base URL smoke failure")
 
 
@@ -29,7 +31,7 @@ class TestLogin:
     def test_init_page(self):
         self.driver.get(base_url_mock)
         self.driver.implicitly_wait(10)
-        assert self.driver.title == "OrangeHRM"
+        assert self.driver.title == "OrangeHRM11"
 
     def test_login(self):
         err = 0
