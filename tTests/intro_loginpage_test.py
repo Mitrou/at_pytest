@@ -110,8 +110,8 @@ class TestLoginPageErrors:
 
     def test_email_empty_flow3(self):
         errors = []
-        error_messages = self.driver.find_elements_by_xpath("//div[@class='form-error']/p")
         self.driver.find_element_by_id("email").send_keys(Keys.BACKSPACE*2)
+        error_messages = self.driver.find_elements_by_xpath("//div[@class='form-error']/p")
         if not len(error_messages) == 1:
             errors.append("Error messages count different from expected")
         if not error_messages[0].get_attribute('innerText') == 'Please input a valid email!':
@@ -119,7 +119,7 @@ class TestLoginPageErrors:
         assert not errors, "errors occured:{}".format(" ".join(errors))
 
     def test_email_empty_flow4(self):
-        self.driver.find_element_by_id("email").send_keys(random_chars_and_numbers_string(3, 2))
+        self.driver.find_element_by_id("email").send_keys(random_chars_and_numbers_string(3, 1))
         assert len(self.driver.find_elements_by_xpath("//div[@class='form-error']/p")) == 0
 
     def test_password_emptyform(self):
