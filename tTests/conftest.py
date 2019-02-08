@@ -7,10 +7,6 @@ import random
 import string
 
 
-base_url_mock = "https://opensource-demo.orangehrmlive.com/"
-base_url = "http://localhost:5005"
-
-
 @pytest.fixture(autouse=True, scope='session')
 def driver(request):
     import allure
@@ -31,15 +27,4 @@ def pytest_exception_interact(node, call, report):
         attachment_type=allure.attachment_type.PNG
     )
 
-
-@pytest.fixture(autouse=True)
-def random_chars_and_numbers_string(length=8, mode=0):
-    random_keys = ''
-    if mode == 0:
-        random_keys = ''.join(random.choices(string.ascii_uppercase + string.digits, k=length))
-    elif mode == 1:
-        random_keys = ''.join(random.choices(string.ascii_uppercase, k=length))
-    elif mode == 2:
-        random_keys = ''.join(random.choices(string.digits, k=length))
-    return random_keys
 

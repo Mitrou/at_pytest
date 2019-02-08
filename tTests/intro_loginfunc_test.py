@@ -9,6 +9,13 @@ from conftest import base_url, random_chars_and_numbers_string
 import allure
 
 
+class TestWebLoginPageLoad:
+    def test_page_load(self):
+        try:
+            self.driver.get(base_url)
+            self.driver.implicitly_wait(10)
+        except:
+            pytest.fail("Base URL smoke failure")
 
 
 class TestLoginPageLogin:

@@ -5,9 +5,9 @@ import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-# from conftest import base_url, random_chars_and_numbers_string
+from toolbelt import base_url, random_chars_and_numbers_string
 import allure
-
+from
 
 
 class TestWebLoginPageLoad:
@@ -15,7 +15,7 @@ class TestWebLoginPageLoad:
         try:
             self.driver.get(base_url)
             self.driver.implicitly_wait(10)
-        except SmkError:
+        except:
             pytest.fail("Base URL smoke failure")
 
 
@@ -25,19 +25,19 @@ class TestLoginPageControlsPresence:
     def test_login_email_present(self):
         try:
             self.driver.find_element_by_id("email").is_displayed()
-        except ElementIsNotPresent:
+        except:
             pytest.fail("Base URL smoke failure")
 
     def test_login_password_present(self):
         try:
             self.driver.find_element_by_id("password").is_displayed()
-        except ElementIsNotPresent:
+        except:
             pytest.fail("Base URL smoke failure")
 
     def test_login_loginbutton_present(self):
         try:
             self.driver.find_element_by_id("submit").is_displayed()
-        except ElementIsNotPresent:
+        except:
             pytest.fail("Base URL smoke failure")
 
 
@@ -69,7 +69,7 @@ class TestLoginPageErrors:
         self.driver.find_element_by_id("email").click()
         try:
             self.driver.find_element_by_class_name('form-error').is_displayed()
-        except ElementIsNotPresent:
+        except:
             pytest.fail("No error form on empty EMAIL field")
 
     def test_email_emptyerrortext(self):
@@ -103,7 +103,7 @@ class TestLoginPageErrors:
         self.driver.find_element_by_id("password").click()
         try:
             self.driver.find_element_by_class_name('form-error').is_displayed()
-        except ElementIsNotPresent:
+        except:
             pytest.fail("No error message on empty EMAIL field")
 
     def test_password_empty_message(self):
