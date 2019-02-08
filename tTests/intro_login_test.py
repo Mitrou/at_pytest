@@ -1,10 +1,11 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import time
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-# from conftest import base_url
+from conftest import base_url, random_chars_and_numbers_string
 import allure
 
 
@@ -19,7 +20,6 @@ class TestWebLoginPageLoad:
 
 
 class TestLoginPageControlsPresence:
-    driver = webdriver.Chrome()
     """1. I should view the user name (text box), password (Text box) and login button.
     """
     def test_login_email_present(self):
@@ -49,7 +49,6 @@ class TestLoginPageControlsAttributes:
 
 
 class TestLoginPageFieldsFill:
-    driver = webdriver.Chrome()
     """3. I should be able to enter my user name.
     """
     def test_username_entering(self):
@@ -59,15 +58,28 @@ class TestLoginPageFieldsFill:
 
 
 class TestLoginPageErrors:
+    driver = webdriver.Chrome()
     """4. I should be displayed error message
     When I enter a wrong combination of user name and password
     When my username/password field is empty
+    NO RECS ON EXACT TEXT SO ANY APPLIED
     """
-    def test_email_error(self):
-        pass
-
-    def test_password_error(self):
-        pass
+    def test_email_emptyerror(self):
+        self.driver.find_element_by_id("email").send_keys(random_chars_and_numbers_string())
+        self.driver.find_element_by_id("email").send_keys(Keys.CONTROL, "a", Keys.DELETE)
+        self.driver.find_element_by_id("email").click()
+        try:
+            self.driver.find_element_by_class_name('form-error').is_displayed()
+        except ElementIsNotPresent:
+            pytest.fail("No error message on empty EMAIL field")
+    def test_password_emptyerror(self):
+        self.driver.find_element_by_id("password").send_keys(random_chars_and_numbers_string())
+        self.driver.find_element_by_id("password").send_keys(Keys.CONTROL, "a", Keys.DELETE)
+        self.driver.find_element_by_id("password").click()
+        try:
+            self.driver.find_element_by_class_name('form-error').is_displayed()
+        except ElementIsNotPresent:
+            pytest.fail("No error message on empty EMAIL field")
 
 
 class TestLoginPageLogin:

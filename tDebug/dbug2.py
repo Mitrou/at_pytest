@@ -1,21 +1,34 @@
 from selenium import webdriver
-import time
+from selenium.webdriver.common.keys import Keys
+from time import sleep
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import random
 import string
+driver = webdriver.Chrome()
+driver.get('http://localhost:5005/#/login')
+driver.find_element_by_id("email").send_keys('sdWWWWsdfsdf')
+sleep(1)
+try:
+    driver.find_element_by_class_name('form-error').is_displayed()
+    print('PRESENT!')
+    print(driver.find_element_by_class_name('form-error')).get_text()
+except:
+    print('not present')
+driver.find_element_by_id("email").send_keys(Keys.CONTROL, "a", Keys.DELETE)
+driver.find_element_by_id("email").click()
+sleep(1)
+try:
+    driver.find_element_by_class_name('form-error').is_displayed()
+    print('PRESENT!')
+    print(driver.find_element_by_class_name('form-error')).get_text()
+except:
+    print('not present')
 
-def random_chars_and_numbers_string(length=8):
-    random_keys = ''.join(random.choices(string.ascii_uppercase + string.digits, k=length))
-    return random_keys
+driver.close()
 
-print(random_chars_and_numbers_string())
-print(random_chars_and_numbers_string(0))
-print(random_chars_and_numbers_string(1))
-print(random_chars_and_numbers_string(14))
-print(random_chars_and_numbers_string(22))
 # driver = webdriver.Chrome()
 # driver.get("http://localhost:5005")
 # driver.implicitly_wait(10)
