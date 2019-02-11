@@ -129,3 +129,6 @@ class TestTabsLoggedSmk:
         assert self.driver.find_elements_by_xpath("//div[@class='pull-left']/h1")[0].get_attribute(
                 'innerText') == 'Meeting Spots'
 
+class TestPost:
+    def test_post_condition(self):
+        self.driver.close()

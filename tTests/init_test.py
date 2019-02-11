@@ -50,3 +50,7 @@ class TestLogin:
         self.driver.find_element_by_link_text("Logout").click()
         assert self.driver.title == "OrangeHRM"
 
+class TestPost:
+    def test_post_condition(self):
+        self.driver.close()
+
