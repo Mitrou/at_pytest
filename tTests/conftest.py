@@ -26,9 +26,15 @@ def errors():
 
 def pytest_exception_interact(node, call, report):
     allure.attach(
-        name='ololo',
+        name='Screenshot',
         body=node.parent._obj.driver.get_screenshot_as_png(),
         attachment_type=allure.attachment_type.PNG
     )
+    allure.attach(
+        name='WebDriverLog',
+        body=node.parent._obj.driver.get_log(),
+        attachment_type=allure.attachment_type.TXT
+    )
+
 
 
