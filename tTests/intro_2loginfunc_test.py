@@ -126,9 +126,9 @@ class TestTabsLoggedSmk:
             )
         except:
             pytest.fail("Meeting Spots tab did not loaded in 2 secs")
-        assert self.driver.find_elements_by_xpath("//div[@class='pull-left']/h1")[0].get_attribute(
-                'innerText') == 'Meeting Spots'
+        assert self.driver.find_elements_by_xpath("//div[@class='pull-left']/h1")[0].get_attribute('innerText') == 'Meeting Spots'
 
-class TestPost:
-    def test_post_condition(self):
-        self.driver.close()
+class TestLogOut:
+    def test_logout(self):
+        self.driver.find_elements_by_xpath("// button[@class = 'mat-icon-button mat-warn ng-star-inserted']").click()
+        assert self.drive.find_elements_by_xpath("//wml-login-form[@ng-reflect-pending = 'false']/h4").get_attribute('innerText') == 'Sign In'
