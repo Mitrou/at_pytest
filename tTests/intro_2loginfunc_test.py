@@ -128,7 +128,17 @@ class TestTabsLoggedSmk:
             pytest.fail("Meeting Spots tab did not loaded in 2 secs")
         assert self.driver.find_elements_by_xpath("//div[@class='pull-left']/h1")[0].get_attribute('innerText') == 'Meeting Spots'
 
+
 class TestLogOut:
-    def test_logout(self):
-        self.driver.find_elements_by_xpath("// button[@class = 'mat-icon-button mat-warn ng-star-inserted']").click()
-        assert self.drive.find_elements_by_xpath("//wml-login-form[@ng-reflect-pending = 'false']/h4").get_attribute('innerText') == 'Sign In'
+    def test_logout_button(self):
+        try:
+            self.driver.find_element_by_xpath("//div[@class = 'mask']") is True
+        except:
+            pytest.fail("Log Out button did not found")
+
+    def test_logout_func(self):
+        self.driver.find_elements_by_xpath("//div[@class = 'mask']")[0].click()
+        try:
+            self.driver.find_element_by_xpath("//div[@class='auth-layout']").is_displayed()
+        except:
+            pytest.fail("User did not logged out")

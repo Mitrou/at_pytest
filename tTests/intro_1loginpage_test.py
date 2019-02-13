@@ -144,7 +144,4 @@ class TestLoginPageErrors:
         self.driver.find_element_by_id("password").send_keys(random_chars_and_numbers_string())
         assert len(self.driver.find_elements_by_xpath("//div[@class='form-error']/p")) == 0
 
-class TestPost:
-    def test_post_condition(self):
-        self.driver.close()
 

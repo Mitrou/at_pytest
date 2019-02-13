@@ -29,7 +29,7 @@ class TestLoginPageLoginFront:
     Reset Password (Password input field)
     Upon successful reset, user should be redirected to login page."""
     def test_forgorpasslink_available(self):
-        self.driver.get(base_url, 'Login')
+        self.driver.get(base_url + '/#/login')
         try:
             WebDriverWait(self.driver, 5).until(
                 EC.presence_of_element_located((By.XPATH, "//div[@class='reset-password-holder']/a"))
@@ -41,8 +41,13 @@ class TestLoginPageLoginFront:
         self.driver.find_element_by_xpath("//div[@class='reset-password-holder']/a").click()
         assert self.driver.page_source.find("Reset Password")
 
-    def test_pos_forgotpass_email(self):
-        self.driver.find_element_by_id("email").send_keys('s.molch.test@gmail.com').submit()
+    def test_forgotpass_email(self):
+        self.driver.find_element_by_id("email").send_keys('s.molch.test@gmail.com')
+        try:
+            self.driver.find_element_by_xpath("//span[@class = 'mat-button-wrapper']").is_enabled()
+        except:
+            pytest.fail("Reset password button is disabled while valid email entered")
+        self.driver.find_element_by_xpath("//span[@class = 'mat-button-wrapper']").click()
         assert self.driver.page_source.find("Email sent")
 
 

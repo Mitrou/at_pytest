@@ -30,11 +30,33 @@ def pytest_exception_interact(node, call, report):
         body=node.parent._obj.driver.get_screenshot_as_png(),
         attachment_type=allure.attachment_type.PNG
     )
-    allure.attach(
-        name='WebDriverLog',
-        body=node.parent._obj.driver.get_log(),
-        attachment_type=allure.attachment_type.TXT
-    )
 
+    webdriver_log = node.parent._obj.driver.get_log('driver')
+    errors = []
+    for log in webdriver_log:
+        if log['level'] == "SEVERE":
+            errors.append(log['message'])
+            errors.append("<br>")
+
+    if len(errors) > 0:
+        allure.attach(
+            name="WebDriver-ERRORS!",
+            body=str(errors).encode(),
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+    browser_console__log = node.parent._obj.driver.get_log('browser')
+    errors = []
+    for log in browser_console__log:
+        if log['level'] == "SEVERE":
+            errors.append(log['message'])
+            errors.append("<br>")
+
+    if len(errors) > 0:
+        allure.attach(
+            name="Console-ERRORS!",
+            body=str(errors).encode(),
+            attachment_type=allure.attachment_type.TEXT
+        )
 
 
