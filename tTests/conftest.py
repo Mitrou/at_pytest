@@ -19,7 +19,7 @@ def driver(request):
     yield driver
     driver.close()
 
-@pytest.fixture(autouse=True, scope='function')
+@pytest.fixture(autouse=True, scope='session')
 def errors():
     errors = []
     return errors
@@ -36,7 +36,6 @@ def pytest_exception_interact(node, call, report):
     for log in webdriver_log:
         if log['level'] == "SEVERE":
             errors.append(log['message'])
-            errors.append("<br>")
 
     if len(errors) > 0:
         allure.attach(
