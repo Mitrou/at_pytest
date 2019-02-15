@@ -2,7 +2,6 @@ import os
 import time
 import allure
 import pytest
-from selenium import webdriver
 import random
 import string
 import imaplib

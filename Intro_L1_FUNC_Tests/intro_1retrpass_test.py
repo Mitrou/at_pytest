@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from toolbelt import base_url
 from toolbelt import random_chars_and_numbers_string
-import allure
+
 
 
 class TestWebLoginPageLoad:

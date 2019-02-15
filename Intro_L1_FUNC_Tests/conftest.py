@@ -1,6 +1,7 @@
 import allure
 import pytest
 
+
 @pytest.fixture(autouse=True, scope='session')
 def driver(request):
     from selenium import webdriver
@@ -12,10 +13,12 @@ def driver(request):
     yield driver
     driver.close()
 
+
 @pytest.fixture(autouse=True, scope='session')
 def errors():
     errors = []
     return errors
+
 
 def pytest_exception_interact(node, call, report):
     allure.attach(
