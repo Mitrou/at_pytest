@@ -2,18 +2,12 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 import pytest
-# from conftest import base_url
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from toolbelt import base_url
 from toolbelt import random_chars_and_numbers_string
 import allure
-
-
-class TestSetup:
-    def test_data_are_valid(self):
-        assert 1 == 1
 
 
 class TestWebLoginPageLoad:

@@ -1,0 +1,150 @@
+---
+test_name: Auth endpoint test
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/authenticate
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: Reset pass initialization test
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/reset-password-init
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: Reset pass finalization test
+stages:
+  - name: Make sure we have the right ID
+    request:
+      url: http://localhost:5004/reset-password-finish
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: University frame trigger
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/university
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: Department trigger
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/department
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: Holiday trigger
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/holiday
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: Current user request
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/current-user
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: User request
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/user
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: User stats request
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/user-statistics
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: Meeting stats info request
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/meeting-statistics
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: Get together frame trigger
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/get-togethers
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: Top interests frame trigger
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/top-interests
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: Top users request
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/top-users
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: Quick stats request
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/quick-stats
+      method: GET
+    response:
+      status_code: 200
+
+---
+test_name: Meeting spots frame trigger
+stages:
+  - name: Make sure we have the right responce code
+    request:
+      url: http://localhost:5004/meeting-spot
+      method: GET
+    response:
+      status_code: 200
+

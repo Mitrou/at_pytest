@@ -1,15 +1,8 @@
-import os
-import time
 import allure
 import pytest
-from selenium import webdriver
-import random
-import string
-
 
 @pytest.fixture(autouse=True, scope='session')
 def driver(request):
-    import allure
     from selenium import webdriver
     driver = webdriver.Chrome()
     driver.set_page_load_timeout(5)
