@@ -1,4 +1,4 @@
--->still under construction!<--
+
 ## Repository for web test automation WM.
 
 Browsers executables must be put into virtualenv/Scripts folder along with
