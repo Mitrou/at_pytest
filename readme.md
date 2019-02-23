@@ -28,4 +28,4 @@ DoD:
 - [x] Initial Structure
 - [x] Reporting Engine
 - [x] Some Smoke tests with FAILED reporting by trace and screenshot on failure
-- [ ] Actual story test coverage
+- [x] Actual story test coverage
