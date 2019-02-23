@@ -30,7 +30,7 @@ def random_chars_and_numbers_string(length=8, mode=0):
 def last_email_from_gmail():
     ORG_EMAIL = "@gmail.com"
     FROM_EMAIL = "s.molch.test" + ORG_EMAIL
-    FROM_PWD = "gtkmvtyb"
+    FROM_PWD = "<password here>"
     SMTP_SERVER = "imap.gmail.com"
     SMTP_PORT = 993
     emails = []
